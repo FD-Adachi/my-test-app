@@ -1,26 +1,94 @@
 <!DOCTYPE html>
-<html>
+<html lang="ja">
 <head>
-    <meta charset="utf-8">
-    <title>テストアプリ</title>
+<meta charset="UTF-8">
+<title>社員連絡先検索</title>
+<style>
+body {
+    font-family: sans-serif;
+    margin: 30px;
+}
+
+input {
+    width: 300px;
+    padding: 8px;
+}
+
+button {
+    padding: 8px 15px;
+}
+
+#result {
+    margin-top: 20px;
+    border: 1px solid #ccc;
+    padding: 10px;
+}
+</style>
 </head>
 <body>
-    <h1>Cloudflare Pages テスト</h1>
 
-    <input id="a">
-    <input id="b">
+<h1>社員連絡先検索</h1>
 
-    <button onclick="calc()">計算</button>
+<input type="text" id="keyword" placeholder="社員名を入力">
+<button onclick="searchEmployee()">検索</button>
 
-    <p id="result"></p>
+<div id="result"></div>
 
-    <script>
-        function calc() {
-            const a = Number(document.getElementById("a").value);
-            const b = Number(document.getElementById("b").value);
+<script>
 
-            document.getElementById("result").innerText = a + b;
-        }
-    </script>
+const employees = [
+{
+    name:"鈴木太郎",
+    dept:"営業部",
+    title:"部長",
+    tel:"090-1111-1111",
+    mail:"suzuki@example.com"
+},
+{
+    name:"田中花子",
+    dept:"工事部",
+    title:"課長",
+    tel:"090-2222-2222",
+    mail:"tanaka@example.com"
+},
+{
+    name:"佐藤一郎",
+    dept:"総務部",
+    title:"主任",
+    tel:"090-3333-3333",
+    mail:"sato@example.com"
+}
+];
+
+function searchEmployee(){
+
+    const keyword =
+      document.getElementById("keyword").value;
+
+    const result =
+      employees.find(emp =>
+        emp.name.includes(keyword));
+
+    const div =
+      document.getElementById("result");
+
+    if(result){
+
+        div.innerHTML = `
+        <h3>${result.name}</h3>
+        <p>部署：${result.dept}</p>
+        <p>役職：${result.title}</p>
+        <p>電話：${result.tel}</p>
+        <p>メール：${result.mail}</p>
+        `;
+    }
+    else{
+        div.innerHTML =
+          "<p>該当者が見つかりません。</p>";
+    }
+}
+
+</script>
+
 </body>
 </html>
