@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>テストアプリ</title>
+</head>
+<body>
+    <h1>Cloudflare Pages テスト</h1>
+
+    <input id="a">
+    <input id="b">
+
+    <button onclick="calc()">計算</button>
+
+    <p id="result"></p>
+
+    <script>
+        function calc() {
+            const a = Number(document.getElementById("a").value);
+            const b = Number(document.getElementById("b").value);
+
+            document.getElementById("result").innerText = a + b;
+        }
+    </script>
+</body>
+</html>
